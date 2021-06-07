@@ -2,7 +2,7 @@
 
 html,
 body {
-  background-image: url("https://images.pexels.com/photos/1546168/pexels-photo-1546168.jpeg");
+  background-image: url("static/hood/bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
