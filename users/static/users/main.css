@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css?family=Numans");
+
+html,
+body {
+  background-image: url("https://images.pexels.com/photos/1546168/pexels-photo-1546168.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  font-family: "Numans", sans-serif;
+  color: #ffffff !important;
+}
+
+.container {
+  height: 100%;
+  align-content: center;
+}
+
+.card {
+  height: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 400px;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}
+.card2 {
+  width: 650px;
+  height: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}
+.links {
+  color: white;
+}
+
+.links a {
+  margin-left: 4px;
+}
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}

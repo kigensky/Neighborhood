@@ -1,0 +1,40 @@
+{% extends 'hood/base.html' %} 
+{% block content %}
+{% load cloudinary %}
+<div class="row pt-5">
+  <div class="col-12">
+    <h2 class="text-center">Mtaa Detail</h2>
+  </div>
+  <hr />
+</div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 py-3">
+    <div class="card card-block">
+      <img class="card-img-2" src="{{mtaa.cloudinary_image.url}}" alt="Photo of sunset">
+      <h5 class="card-title mt-3 mb-3 px-2"><strong class="text-capitalize"> {{mtaa.title }}</strong> • {{ mtaa.owner.username }}</h5>
+      <p class="px-2"><i class="fas fa-map-marker me-3"></i></i>{{ mtaa.location }}</p>
+      <small class = "text-muted text-uppercase px-2">created on {{mtaa.timestamp| date:"D d M Y"}}</small>
+      <div class="px-2">
+        <a
+        href="{% url 'mtaa-home' %}"
+        class="btn btn-outline-success btn-circle btn-sm m-2 shadow"
+        ><i class="fas fa-angle-double-left"></i
+        ></a>
+      {% if user.is_superuser %}
+      <a
+        href="{% url 'mtaa-delete' mtaa.id %}"
+        class="btn btn-outline-danger btn-circle btn-sm m-2 shadow"
+        ><i class="far fa-trash-alt"></i
+      ></a>
+      <a
+        href="{% url 'mtaa-update' mtaa.id %}"
+        class="btn btn-outline-primary btn-sm btn-circle m-2 shadow shadow"
+        ><i class="fas fa-edit"></i
+      ></a>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

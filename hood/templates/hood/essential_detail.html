@@ -1,0 +1,52 @@
+{% extends 'hood/base.html' %} 
+{% block content %}
+{% load cloudinary %}
+<div class="row pt-5">
+  <div class="col-12">
+    <h2 class="text-center">Essential Contacts</h2>
+  </div>
+  <hr />
+</div>
+{% if user.is_superuser %}
+<div class="row">
+  <div class="col-12">
+    <a
+      href="{% url 'essential-create' %}"
+      class="btn btn-primary btn-sm btn-circle float-start m-2 shadow"
+      ><i class="fa fa-plus" aria-hidden="true"></i
+    ></a>
+  </div>
+</div>
+{% endif %}
+<div class="row">
+  <div class="col-md-3 col-sm-6 py-3">
+    <div class="card card-block">
+      <img class="card-img" src="{{essential.cloudinary_image.url}}" alt="Photo of sunset">
+      <h5 class="card-title mt-3 mb-3 px-2"><strong class="text-capitalize"> {{essential.officer }}</strong> • {{ essential.title }}</h5>
+      <p class="px-2"><i class="fas fa-envelope me-3"></i>{{ essential.email }}</p>
+      <p class="px-2"><i class="fas fa-map-marker me-3"></i></i>{{ essential.mtaa }}</p>
+      <small class = "text-muted text-uppercase px-2">created on {{essential.timestamp| date:"D d M Y"}}</small>
+      <div class="px-2">
+        <a
+        href="{% url 'essential-home' %}"
+        class="btn btn-outline-success btn-circle btn-sm m-2 shadow"
+        ><i class="fas fa-angle-double-left"></i
+        ></a>
+      {% if user.is_superuser %}
+      <a
+        href="{% url 'essential-delete' essential.id %}"
+        class="btn btn-outline-danger btn-circle btn-sm m-2 shadow"
+        ><i class="far fa-trash-alt"></i
+      ></a>
+      <a
+        href="{% url 'essential-update' essential.id %}"
+        class="btn btn-outline-primary btn-sm btn-circle m-2 shadow shadow"
+        ><i class="fas fa-edit"></i
+      ></a>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'hood/base.html' %} 
 {% block content %}
-{% load cloudinary %}
+{% load cloudinary%}
 <div class="row pt-5">
   <div class="col-12">
     <h2 class="text-center">Notices</h2>
@@ -17,20 +17,18 @@
   </div>
 </div>
 <div class="row">
-  {% for post in object_list %}
-  <div class="col-md-3 col-sm-6 py-3">
+  <div class="col-md-12 col-sm-12 py-3">
     <div class="card card-block">
-      <img class="card-img" src="{{post.cloudinary_image.url}}" alt="Photo of sunset">
+      <img class="card-img-2" src="{{post.cloudinary_image.url}}" alt="Photo of sunset">
       <h5 class="card-title mt-3 mb-3 px-2"><strong class="text-capitalize"> {{post.title }}</strong></h5>
       <p class="px-2"><i class="fas fa-user me-3"></i></i>{{ post.creator.username }}</p>
       <small class = "text-muted text-uppercase px-2">created on {{post.timestamp| date:"D d M Y"}}</small>
       <div class="px-2">
         <a
-        href="{% url 'hood-detail' post.id %}"
-        target="_blank"
+        href="{% url 'hood-home' %}"
         class="btn btn-outline-success btn-circle btn-sm m-2 shadow"
-        ><i class="fa fa-eye" aria-hidden="true"></i
-      ></a>
+        ><i class="fas fa-angle-double-left"></i
+        ></a>
       {% if post.creator == user %}
       <a
         href="{% url 'hood-delete' post.id %}"
@@ -46,7 +44,6 @@
       </div>
     </div>
   </div>
-  {% endfor %}
 </div>
 </div>
 {% endblock %}

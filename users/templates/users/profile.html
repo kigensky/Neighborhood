@@ -1,0 +1,47 @@
+{% extends 'hood/base.html' %} 
+{% block content %} 
+{% load crispy_forms_tags%}
+{% load cloudinary %}
+<div class="row">
+  <div class="col-sm-12 col-md-4 text-center">
+    <div class="image_outer_container">
+      <div class="rounded-circle">
+        <img
+          class="rounded-circle"
+          style="width: 200px; height: 200px"
+          src="{{user.profile.cloudinary_image.url|default:'img/default-avatar.png' }}"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-1 mt-4">
+    <h3>Profile Details</h3>
+    <p><strong> Username: </strong>{{user.username}}</p>
+    <p><strong> Email: </strong>{{user.email}}</p>
+    <p><strong> Phone Number: </strong>{{user.profile.phone_number}}</p>
+    <p><strong> Neighbourhood: </strong>{{user.profile.mtaa.name}}</p>
+  </div>
+
+  <div class="col-md-4 col-sm-1 mt-4">
+    <p><strong> Bio: </strong></p>
+    <p>{{user.profile.bio}}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6 col-sm-12 float-md-none float-sm-left">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Edit Profile</legend>
+        {{ u_form|crispy }} {{ p_form|crispy }}
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-outline-info mt-3" type="submit">Update</button>
+      </div>
+    </form>
+  </div>
+</div>
+<hr />
+
+{% endblock %}
