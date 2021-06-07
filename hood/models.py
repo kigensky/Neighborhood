@@ -24,7 +24,7 @@ class Post(models.Model):
     # image = models.ImageField(upload_to='images/')
     body = models.TextField()
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
-    Mtaa = models.ForeignKey(Mtaa, on_delete=models.CASCADE)
+    # location = models.ForeignKey(Mtaa, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -36,7 +36,7 @@ class Business(models.Model):
     email = models.CharField(max_length=100)
     body = models.TextField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    Mtaa = models.ForeignKey(Mtaa, on_delete=models.CASCADE)
+    # location = models.ForeignKey(Mtaa, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(default=timezone.now)
 
     class Meta:
@@ -51,7 +51,7 @@ class Essential(models.Model):
     officer = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
-    Mtaa = models.ForeignKey(Mtaa, on_delete=models.CASCADE)
+    # location = models.ForeignKey(Mtaa, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
