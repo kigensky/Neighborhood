@@ -25,12 +25,12 @@ class PostListView(ListView):
 class PostCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Post
     success_url = reverse_lazy('hood-home')
-    fields = ['title', 'body', 'cloudinary_image','creator', 'Mtaa']
+    fields = ['title', 'body', 'cloudinary_image']
     success_message = "The Post created successfully!"
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
-        # form.instance.mtaa = self.request.user.profile.mtaa
+        form.instance.Mtaa = self.request.user.profile.mtaa
         return super(PostCreateView, self).form_valid(form)
 
     def test_func(self):
@@ -47,7 +47,7 @@ class PostUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
-        form.instance.mtaa = self.request.user.profile.mtaa
+        form.instance.Mtaa = self.request.user.profile.mtaa
         return super().form_valid(form)
 
     def test_func(self):
@@ -96,7 +96,7 @@ class BusinessCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
-        form.instance.mtaa = self.request.user.profile.mtaa
+        form.instance.Mtaa = self.request.user.profile.mtaa
         return super().form_valid(form)
 
     def test_func(self):
@@ -114,7 +114,7 @@ class BusinessUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
-        form.instance.mtaa = self.request.user.profile.mtaa
+        form.instance.Mtaa = self.request.user.profile.mtaa
         return super().form_valid(form)
 
     def test_func(self):
