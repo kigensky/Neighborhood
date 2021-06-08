@@ -1,4 +1,5 @@
 from django.urls import path
+from . import views
 from .views import(
 
 PostListView,
@@ -50,5 +51,7 @@ urlpatterns = [
     path('mtaa/new/', MtaaCreateView.as_view(), name="mtaa-create"),
     path('mtaa/<int:pk>/update/',MtaaUpdateView.as_view(), name="mtaa-update"),
     path('mtaa/<int:pk>/delete/',MtaaDeleteView.as_view(), name="mtaa-delete"),
-
+    
+    path('join_hood/<id>', views.join_mtaa, name='join-hood'),
+    path('leave_hood/<id>', views.leave_mtaa, name='leave-hood') 
 ]
