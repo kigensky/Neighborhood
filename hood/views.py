@@ -10,9 +10,11 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from users.models import Profile
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-class PostListView(ListView):
+
+class PostListView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'post_list.html'
 
@@ -22,7 +24,7 @@ class PostListView(ListView):
             return Post.objects.filter(title__icontains=query)
         else:
             return Post.objects.all()
-        
+      
 class PostCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Post
     success_url = reverse_lazy('hood-home')
@@ -75,13 +77,13 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-class BusinessListView(ListView):
+class BusinessListView(LoginRequiredMixin, ListView):
     model = Business
     template_name = 'business_list.html'
     queryset = Business.objects.order_by('-timestamp')
 
-    # def get_queryset(self):
-    #     return Business.objects.filter(mtaa=self.request.user.profile.mtaa)
+    def get_queryset(self):
+        return Business.objects.filter(Mtaa=self.request.user.profile.mtaa)
     def get_queryset(self):
         query = self.request.GET.get('q')
         if query:
