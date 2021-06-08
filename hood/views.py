@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (ListView,DetailView,CreateView,UpdateView,DeleteView)
@@ -9,6 +9,7 @@ from .forms import PostCreateForm
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
+from users.models import Profile
 # Create your views here.
 
 class PostListView(ListView):
@@ -216,4 +217,48 @@ class MtaaDetailView(DetailView):
 class MtaaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Mtaa
     success_url = reverse_lazy('mtaa-home')
-    success_message = "Your Mtaa %(title) was deleted successfully!"        
+    success_message = "Your Mtaa %(title) was deleted successfully!"   
+    
+    
+def join_mtaa(request, id):
+    mtaa = get_object_or_404(Mtaa, id=id)
+    request.user.profile.mtaa = mtaa
+    request.user.profile.save()
+    return redirect('hood-home')
+
+
+def leave_mtaa(request, id):
+    hood = get_object_or_404(Mtaa, id=id)
+    request.user.profile.mtaa = None
+    request.user.profile.save()
+    return redirect('hood')    
+    
+    
+# def single_hood(request, hood_id):
+#     hood = Mtaa.objects.get(id=hood_id)
+#     business = Business.objects.filter(mtaa=hood)
+#     posts = Post.objects.filter(hood=hood)
+#     posts = posts[::-1]
+#     if request.method == 'POST':
+#         form = BusinessForm(request.POST)
+#         if form.is_valid():
+#             b_form = form.save(commit=False)
+#             b_form.mtaa = hood
+#             b_form.user = request.user.profile
+#             b_form.save()
+#             return redirect('single-hood', hood.id)
+#     else:
+#         form = BusinessForm()
+#     params = {
+#         'hood': hood,
+#         'business': business,
+#         'form': form,
+#         'posts': posts
+#     }
+#     return render(request, 'single_hood.html', params)
+
+
+def hood_members(request, hood_id):
+    hood = Mtaa.objects.get(id=hood_id)
+    members = Profile.objects.filter(mtaa=hood)
+    return render(request, 'members.html', {'members': members})    
